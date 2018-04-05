@@ -14,7 +14,7 @@ class CommentsList extends React.Component {
       newComment: {author: '', date: '', text: '', likes: 0, responses: [],
                    id: 0, commentId: null},
       respondToComment: null,
-      commentsCount: props.sampleCommentsCount // parseInt (props.sampleCommentsCount, 10)
+      commentsCount: this.sampleCommentsCountResult
     }
 
     this.submitComment = this.submitComment.bind (this);
@@ -22,12 +22,23 @@ class CommentsList extends React.Component {
     this.respondToComment = this.respondToComment.bind (this);
   }
 
+  countSampleComments () {
+    let levelOneCount = this.props.sampleComments.length;
+    let responsesCountArr = this.props.sampleComments.map (
+      comment => comment.responses.length
+    );
+    let responsesCount = responsesCountArr.reduce ((a,b) => a+b);
+    let result = levelOneCount + responsesCount;
+    return result; 
+  }
+  
+  sampleCommentsCountResult = this.countSampleComments();
+
   handleChange (event) {
     let newComment = {};
     newComment.text = event.target.value;
     this.setState ({newComment: newComment});
   }
-
 
   respondToComment (event) {
     let respondToComment = event.target.id;
@@ -37,7 +48,6 @@ class CommentsList extends React.Component {
     form[formIndex].children[0].focus();
     this.setState ({respondToComment: respondToComment});
   }
-
 
   submitComment (event) {
       event.preventDefault();
@@ -78,11 +88,11 @@ class CommentsList extends React.Component {
     );
   }
   
-
   render () {
     return (
       <div>
         <CommentCounter commentsCount={this.state.commentsCount}/>
+
         {this.state.comments.map (
           comment => <Comment
                         key={comment.id}
@@ -95,6 +105,7 @@ class CommentsList extends React.Component {
                         onClick = {this.respondToComment}
                       />
         )}
+
         < CommentForm value={this.state.newComment.text}
                       onChange={this.handleChange}
                       onSubmit={this.submitComment}
@@ -102,6 +113,6 @@ class CommentsList extends React.Component {
       </div>
     );
   }
-
 }
+
 export default CommentsList;

@@ -1,12 +1,12 @@
 import React from 'react';
 import CommentsList from './CommentsList';
 
-class Article extends React.Component {
+const Article = (props) => {
 
-  sampleComments = [
+  const sampleComments = [
     {
       author: 'AV',
-      date: '31.03.18',
+      date: '01.04.18',
       text: 'Hello world!',
       likes: 1,
       responses: [{
@@ -22,39 +22,25 @@ class Article extends React.Component {
     }, 
     { 
       author: 'Surprised',
-      date: '31.03.18',
+      date: '01.04.18',
       text: 'AAAAAA!!!!',
       likes: 0,
       responses: [],
       id: 1,
       commentId: null
     }
-  ]
+  ];
 
-  sampleCommentsCount () {
-    let levelOneCount = this.sampleComments.length;
-    let responsesCountArr = this.sampleComments.map (
-      comment => comment.responses.length
-    );
-    let responsesCount = responsesCountArr.reduce ((a,b) => a+b);
-    let result = levelOneCount + responsesCount;
-    return result; 
-  }
-  
-  sampleCountResult = this.sampleCommentsCount();
-
-  render () {
-    return (
-      <div className="row">
-        <div className="col-12">
-          <h1>{this.props.heading}</h1>
-          <p>{this.props.content}</p>
-          <CommentsList sampleComments={this.sampleComments}
-                      sampleCommentsCount={this.sampleCountResult} articleId={this.props.articleId}/>
-        </div>
+  return (
+    <div className="row">
+      <div className="col-12">
+        <h1>{props.heading}</h1>
+        <p>{props.content}</p>
+        <CommentsList sampleComments={sampleComments}
+                      articleId={props.articleId}/>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Article;

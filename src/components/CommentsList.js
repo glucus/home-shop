@@ -22,24 +22,16 @@ class CommentsList extends React.Component {
     this.respondToComment = this.respondToComment.bind (this);
   }
 
-/*
-  countResponses = () => {
-    let responseNumber = [];
-    this.state.comments.map (
-      comment => responseNumber.push (comment.responses.length));
-    return responseNumber;
-  };
-*/
-
   handleChange (event) {
     let newComment = {};
     newComment.text = event.target.value;
     this.setState ({newComment: newComment});
   }
 
-
   respondToComment (event) {
     let respondToComment = event.target.id;
+    let form = document.getElementById('commentFormInput');
+    form.focus();
     this.setState ({respondToComment: respondToComment});
   }
 

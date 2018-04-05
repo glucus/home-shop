@@ -9,7 +9,7 @@ const Comment = (props) => {
           {props.text} &nbsp;|&nbsp;
           {props.likes} likes &nbsp;
 
-          <button id={props.id} 
+          <button id={props.id}
                   onClick={props.onClick}>
             respond
           </button>

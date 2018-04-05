@@ -1,45 +1,23 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CommentsList from './components/CommentsList';
+import Article from './components/Article';
+
 
 class App extends Component {
 
-  sampleComments = [
-    {
-      author: 'AV',
-      date: '31.03.18',
-      text: 'Hello world!',
-      likes: 1,
-      responses: [{
-          author: 'Alien mind',
-          date: '01.04.18',
-          text: 'Hello earthman!',
-          likes: 1,
-          id: 3,
-          commentId: 0
-        }],
-      id: 0,
-      commentId: null
-    }, 
-    { 
-      author: 'Lemongrasp',
-      date: '31.03.18',
-      text: 'AAAAAA!!!!',
-      likes: 0,
-      responses: [
-        {author: 'Banshee',
-          date: '31.03.18',
-          text: 'OMG!!!!',
-          likes: 1,
-          id: 4,
-          commentId: 1
-        }
-      ],
-      id: 1,
-      commentId: null
-    }
-  ]
+  articles = [
+  {
+    id: 0,
+    heading: 'New Times',
+    content: 'Lopem ipsum...'
+  }, 
+  { 
+    id: 1,
+    heading: 'New Times2',
+    content: 'Lopem ipsum2...'
+  }
+]
 
   render() {
     return (
@@ -48,9 +26,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <CommentsList sampleComments={this.sampleComments}
-                      sampleCommentsCount="4"/>
-      </div>
+        
+        <div className="container">
+          {this.articles.map (article => <Article key={article.id}
+                                                  heading={article.heading}
+                                                  content={article.content}
+                                                  articleId={article.id}
+                                         />)}
+        </div>
+        </div>
     );
   }
 }

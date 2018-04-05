@@ -1,7 +1,7 @@
 import React from 'react';
+import CommentCounter from './CommentCounter';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
-import CommentCounter from './CommentCounter';
 
 class CommentsList extends React.Component {
 
@@ -14,7 +14,7 @@ class CommentsList extends React.Component {
       newComment: {author: '', date: '', text: '', likes: 0, responses: [],
                    id: 0, commentId: null},
       respondToComment: null,
-      commentsCount: parseInt (props.sampleCommentsCount, 10)
+      commentsCount: props.sampleCommentsCount // parseInt (props.sampleCommentsCount, 10)
     }
 
     this.submitComment = this.submitComment.bind (this);
@@ -28,16 +28,18 @@ class CommentsList extends React.Component {
     this.setState ({newComment: newComment});
   }
 
+
   respondToComment (event) {
     let respondToComment = event.target.id;
-    let form = document.getElementById('commentFormInput');
-    form.focus();
+    let form = document.getElementsByTagName('form');
+    let formIndex = this.props.articleId;
+
+    form[formIndex].children[0].focus();
     this.setState ({respondToComment: respondToComment});
   }
 
 
   submitComment (event) {
-
       event.preventDefault();
       let date = new Date();
       let commentId = this.state.respondToComment;
@@ -81,7 +83,8 @@ class CommentsList extends React.Component {
     return (
       <div>
         <CommentCounter commentsCount={this.state.commentsCount}/>
-        {this.state.comments.map (comment => <Comment
+        {this.state.comments.map (
+          comment => <Comment
                         key={comment.id}
                         id={comment.id}
                         author={comment.author}

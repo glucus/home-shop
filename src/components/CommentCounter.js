@@ -1,9 +1,10 @@
 import React from 'react';
 
-const CommentCounter = (props) => {
+const CommentCounter = (props) => { 
+  
   return (
     <div>
-      <h2>{props.comments.length} comments</h2>
+      <h2>{props.commentsCount} comments &nbsp;</h2>
     </div>
   );
 };

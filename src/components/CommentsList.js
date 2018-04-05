@@ -10,44 +10,11 @@ class CommentsList extends React.Component {
     super (props);
 
     this.state = {
-      comments: [
-        {
-          author: 'AV',
-          date: '31.03.18',
-          text: 'Hello world!',
-          likes: 1,
-          responses: [{
-              author: 'Alien mind',
-              date: '01.04.18',
-              text: 'Hello earthman!',
-              likes: 1,
-              id: 3,
-              commentId: 0
-            }],
-          id: 0,
-          commentId: null
-        }, 
-        { 
-          author: 'Lemongrasp',
-          date: '31.03.18',
-          text: 'AAAAAA!!!!',
-          likes: 0,
-          responses: [
-            {author: 'Banshee',
-              date: '31.03.18',
-              text: 'OMG!!!!',
-              likes: 1,
-              id: 4,
-              commentId: 1
-            }
-          ],
-          id: 1,
-          commentId: null
-        }
-      ],
+      comments: props.sampleComments,
       newComment: {author: '', date: '', text: '', likes: 0, responses: [],
                    id: 0, commentId: null},
-      respondToComment: null
+      respondToComment: null,
+      commentsCount: parseInt (props.sampleCommentsCount, 10)
     }
 
     this.submitComment = this.submitComment.bind (this);
@@ -55,16 +22,27 @@ class CommentsList extends React.Component {
     this.respondToComment = this.respondToComment.bind (this);
   }
 
+/*
+  countResponses = () => {
+    let responseNumber = [];
+    this.state.comments.map (
+      comment => responseNumber.push (comment.responses.length));
+    return responseNumber;
+  };
+*/
+
   handleChange (event) {
     let newComment = {};
     newComment.text = event.target.value;
     this.setState ({newComment: newComment});
   }
 
+
   respondToComment (event) {
     let respondToComment = event.target.id;
     this.setState ({respondToComment: respondToComment});
   }
+
 
   submitComment (event) {
 
@@ -91,23 +69,26 @@ class CommentsList extends React.Component {
         let targetCommentsArr = comments.filter(comment => comment.id === newComment.commentId);
         let targetComment = targetCommentsArr[0];
         let targetIndex = comments.indexOf (targetComment);
+
         targetComment.responses.push(newComment);
         comments.splice (targetIndex, 1, targetComment);
       }
-      this.setState ({
-        comments: comments, 
+
+      this.setState (prevState => ({
+        comments: comments,
+        commentsCount: prevState.commentsCount + 1,
         respondToComment: null,
         newComment: {author: '', date: '', text: '', likes: 0, responses: [],
         id: 0, commentId: null}
-      });
-
+      })
+    );
   }
   
 
   render () {
     return (
       <div>
-        <CommentCounter comments={this.state.comments}/>
+        <CommentCounter commentsCount={this.state.commentsCount}/>
         {this.state.comments.map (comment => <Comment
                         key={comment.id}
                         id={comment.id}

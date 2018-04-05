@@ -1,22 +1,30 @@
 import React from 'react';
+import Response from './Response';
 
 const Comment = (props) => {
     return (
       <div>
         <p>
-        {props.author} - {props.date} | {props.text} | {props.likes} likes &nbsp;
-        <button onClick={props.onClick} id={props.id}>respond</button>
-        </p>
-        
+          {props.author} - {props.date} &nbsp;|&nbsp;
+          {props.text} &nbsp;|&nbsp;
+          {props.likes} likes &nbsp;
 
+          <button id={props.id} 
+                  onClick={props.onClick}>
+            respond
+          </button>
+        </p>
+  
         {props.responses.length > 0 && <ul>
           {props.responses.map (
-            response => <p key={response.id}>
-              {response.author} - {response.date} | {response.text} | {props.likes} +
-            </p>
-            
-          )}
-        </ul>}
+            response => <Response key={response.id}
+                          id={response.id}
+                          author={response.author}
+                          date={response.date}
+                          text={response.text}
+                          likes={response.likes}
+                          onClick={props.onClick}/>
+          )}</ul>}
       </div>
     );
 };

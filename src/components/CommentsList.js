@@ -76,6 +76,10 @@ class CommentsList extends React.Component {
         comments.splice (targetIndex, 1, targetComment);
       }
 
+      let form = document.getElementsByTagName('form');
+      let formIndex = this.props.articleId;
+      form[formIndex].children[1].blur();
+
       this.setState (prevState => ({
         comments: comments,
         commentsCount: prevState.commentsCount + 1,

@@ -3,8 +3,8 @@ import Response from './Response';
 
 const Comment = (props) => {
     return (
-      <div className="card">
-        <div className="card-body">
+      <div className="card col-12">
+        <div className="card-body text-left">
           {props.author} - {props.date} &nbsp;|&nbsp;
           {props.text} &nbsp;|&nbsp;
           {props.likes} likes &nbsp;

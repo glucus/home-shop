@@ -19,23 +19,14 @@ const Article = (props) => {
         }],
       id: 0,
       commentId: null
-    }, 
-    { 
-      author: 'Surprised',
-      date: '01.04.18',
-      text: 'AAAAAA!!!!',
-      likes: 0,
-      responses: [],
-      id: 1,
-      commentId: null
     }
   ];
 
   return (
     <div className="row">
-      <div className="col-12">
-        <h1>{props.heading}</h1>
-        <p>{props.content}</p>
+      <div className="col-sm-12 col-md-10 offset-md-1">
+        <h2>{props.heading}</h2>
+        <p className="text-justify">{props.content}</p>
         <CommentsList sampleComments={sampleComments}
                       articleId={props.articleId}/>
       </div>

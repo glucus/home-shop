@@ -1,9 +1,10 @@
 import React from 'react';
+import Response from './Response';
 
 const Comment = (props) => {
     return (
       <div className="card">
-        <p>
+        <div className="card-body">
           {props.author} - {props.date} &nbsp;|&nbsp;
           {props.text} &nbsp;|&nbsp;
           {props.likes} likes &nbsp;
@@ -13,14 +14,17 @@ const Comment = (props) => {
                   className="btn btn-link">
             respond
           </button>
-        </p>
+        </div>
   
         {props.responses.length > 0 && <ul>
           {props.responses.map (
-            response => (
-            <div key={response.id}><p>
-              {response.author} - {response.date} | {response.text} | {response.likes} +
-            </p></div>)
+            response => <Response key={response.id}
+                          id={response.id}
+                          author={response.author}
+                          date={response.date}
+                          text={response.text}
+                          likes={response.likes}
+                          onClick={props.onClick}/>
           )}</ul>}
       </div>
     );

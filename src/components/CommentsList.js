@@ -6,7 +6,6 @@ import CommentForm from './CommentForm';
 class CommentsList extends React.Component {
 
   constructor (props) {
-    
     super (props);
 
     this.state = {
@@ -44,7 +43,6 @@ class CommentsList extends React.Component {
     let respondToComment = event.target.id;
     let form = document.getElementsByTagName('form');
     let formIndex = this.props.articleId;
-
     form[formIndex].children[0].focus();
     this.setState ({respondToComment: respondToComment});
   }

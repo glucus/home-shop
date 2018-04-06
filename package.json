@@ -2,8 +2,10 @@
   "name": "test-aventica",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://18.194.13.56",
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "gh-pages": "^1.1.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-scripts": "1.1.3"

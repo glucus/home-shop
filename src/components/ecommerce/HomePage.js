@@ -1,4 +1,6 @@
 import React from 'react';
+import PaymentMethods from './PaymentMethods';
+import BuyAsGiftCheckbox from './BuyAsGiftCheckBox';
 
 class HomePage extends React.Component {
 
@@ -10,7 +12,7 @@ class HomePage extends React.Component {
     };
   }
   
-  handleCheck (e) {
+  handleChange (e) {
     const value = e.target.checked;
     this.setState({
       buyAsGift: value
@@ -26,24 +28,10 @@ class HomePage extends React.Component {
           <h1>Оформление подписки</h1>
           <p>Спасибо, что решили стать участниками клуба</p>
         </div>
-        <div>
-          <h4>Выберите способ оплаты</h4>
-            {this.props.paymentMethods.map (
-              method => <button key={method.id}>{method.name}</button>
-            )}
-            {this.state.buyAsGift ? (
-              <button disabled>Подарочный сертификат</button>) : (
-              <button>Подарочный сертификат</button>
-            )}
-          <div>
-            <label>Покупаю подписку в подарок</label>
-            <input type="checkbox"
-                   name="buyAsGift"
-                   checked={this.state.buyAsGift}
-                   onChange={(e) => this.handleCheck(e)}>
-            </input>
-          </div>
-        </div>
+        <PaymentMethods paymentMethods={this.props.paymentMethods} 
+                        buyAsGift={this.state.buyAsGift} />
+        <BuyAsGiftCheckbox buyAsGift={this.state.buyAsGift}
+                           handleChange={e => this.handleChange(e)} />
         <div>
           <p>Защищено, без комиссий</p>
         </div>

@@ -1,6 +1,10 @@
 import React from 'react';
 
 const PaymentMethods = (props) => {
+  
+  const handleClick = (e) => {
+    props.handleClick(e);
+  };
 
   return (
     <div>
@@ -10,7 +14,9 @@ const PaymentMethods = (props) => {
       )}
     {props.buyAsGift ? (
     <button disabled>Подарочный сертификат</button>) : (
-    <button>Подарочный сертификат</button>
+    <button onClick = {e => handleClick(e)}>
+      Подарочный сертификат
+    </button>
     )}
   </div>
   );

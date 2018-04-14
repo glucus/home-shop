@@ -1,6 +1,9 @@
 import React from 'react';
+
+import Header from './common/Header';
 import PaymentMethods from './PaymentMethods';
 import BuyAsGiftCheckbox from './BuyAsGiftCheckBox';
+import Footer from './common/Footer';
 
 class HomePage extends React.Component {
 
@@ -19,25 +22,23 @@ class HomePage extends React.Component {
     });
   }
 
+  handleClick (e) {
+    this.setState (
+      prevState => ({buyAsGift: !prevState.buyAsGift})
+    );
+  }
+
   render () {
     // move this to common header and footer later
     return (
       <div>
-        <div>
-          <h4>Домашний магазин</h4>
-          <h1>Оформление подписки</h1>
-          <p>Спасибо, что решили стать участниками клуба</p>
-        </div>
+        <Header />
         <PaymentMethods paymentMethods={this.props.paymentMethods} 
-                        buyAsGift={this.state.buyAsGift} />
+                        buyAsGift={this.state.buyAsGift}
+                        handleClick={e => this.handleClick(e)} />
         <BuyAsGiftCheckbox buyAsGift={this.state.buyAsGift}
                            handleChange={e => this.handleChange(e)} />
-        <div>
-          <p>Защищено, без комиссий</p>
-        </div>
-        <div>
-          <p>Футер</p>
-        </div>
+        <Footer />
       </div>
     );
 

@@ -10,12 +10,17 @@ const PaymentMethods = (props) => {
     <div>
       <h4>Выберите способ оплаты</h4>
       {props.paymentMethods.map (
-        method => <button key={method.id}>{method.name}</button>
+        method => <button key={method.id}
+                          onClick={e => handleClick(e)}
+                          name={method.name}>
+                    {method.name}
+                  </button>
       )}
+      <br/>
     {props.buyAsGift ? (
-    <button disabled>Подарочный сертификат</button>) : (
+    <button disabled>Подарочный код</button>) : (
     <button onClick = {e => handleClick(e)}>
-      Подарочный сертификат
+      Подарочный код
     </button>
     )}
   </div>

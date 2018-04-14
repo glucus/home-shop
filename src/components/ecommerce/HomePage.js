@@ -23,20 +23,24 @@ class HomePage extends React.Component {
   }
 
   handleClick (e) {
+    console.log (e.target.name);
     this.setState (
-      prevState => ({buyAsGift: !prevState.buyAsGift})
+      prevState => ({
+        buyAsGift: !prevState.buyAsGift
+      })
     );
   }
 
   render () {
-    // move this to common header and footer later
+
     return (
       <div>
         <Header />
         <PaymentMethods paymentMethods={this.props.paymentMethods} 
                         buyAsGift={this.state.buyAsGift}
                         handleClick={e => this.handleClick(e)} />
-        <BuyAsGiftCheckbox buyAsGift={this.state.buyAsGift}
+        <p>{this.state.selectedMethod} selected</p>
+         <BuyAsGiftCheckbox buyAsGift={this.state.buyAsGift}
                            handleChange={e => this.handleChange(e)} />
         <Footer />
       </div>

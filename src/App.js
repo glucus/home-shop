@@ -6,10 +6,6 @@ import HomePage from './components/ecommerce/HomePage';
 class App extends Component {
 
   render() {
-    //const name = "Sasha";
-    //const unread = ['Spam', 'Hi!'];
-    //const numbers = [1, 2, 3, 4, 5];
-
     const paymentMethods = [
       {
         id: 0, 
@@ -20,6 +16,21 @@ class App extends Component {
         id: 1, 
         name: 'Yandex Money',
         logo: 'yandexMoney.png'
+      },
+      {
+        id: 2,
+        name: 'Pay Pal',
+        logo: 'payPal.png'
+      },
+      {
+        id: 3,
+        name: 'SMS',
+        logo: ''
+      },
+      {
+        id: 4,
+        name: 'QIWI',
+        logo: 'qiwi.png'
       }
     ];
 

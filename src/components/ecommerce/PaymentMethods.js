@@ -7,25 +7,37 @@ const PaymentMethods = (props) => {
   };
 
   return (
-    <div>
+    <div className="paymentMethods">
       <h4>Выберите способ оплаты</h4>
-      {props.paymentMethods.map (
-        method => <button key={method.id}
-                          onClick={e => handleClick(e)}
-                          name={method.name}>
-                    {method.name}
-                  </button>
-      )}
-      <br/>
-    {props.buyAsGift ? (
-    <button disabled>Подарочный код</button>) : (
-    <button onClick = {e => handleClick(e)}>
-      Подарочный код
-    </button>
-    )}
+      <div>
+        {props.paymentMethods.map (
+          method => (
+          <button key={method.id}
+                  id={method.id}
+                  onClick={e => handleClick(e)}
+                  name={method.name}>
+                  {method.name}
+          </button>
+          )
+        )}
+        {<button disabled={props.buyAsGift}
+                 onClick = {e => handleClick(e)}
+                 name='Подарочный код'>
+          Подарочный код
+        </button>}
+      </div>
   </div>
   );
 
 };
 
 export default PaymentMethods;
+
+/*
+    {props.buyAsGift ? (
+    <button disabled>Подарочный код</button>) : (
+    <button onClick = {e => handleClick(e)}>
+      Подарочный код
+    </button>
+    )}
+*/

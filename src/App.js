@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import Header from './components/ecommerce/common/Header';
 import HomePage from './components/ecommerce/HomePage';
+import Footer from './components/ecommerce/common/Footer';
 
 class App extends Component {
 
@@ -36,7 +37,9 @@ class App extends Component {
 
     return (
       <div>
+        <Header />
         <HomePage paymentMethods={paymentMethods}/>
+        <Footer />
       </div>
     );
   }

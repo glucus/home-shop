@@ -4,23 +4,19 @@ body {
   font-family: sans-serif;
 }
 
-/*
-.row {
-  margin-top: 40px;
-}
-
-.comment-counter {
-  margin-top: 30px;
-}
-*/
-
 div {
   text-align: center;
   border: 1px solid lightgrey;
 }
 
-/*
-ul {
-  list-style-type: none;
+.hidden {
+  display: none;
 }
-*/
+
+.highlighted {
+  background-color:rgb(255, 223, 153);
+}
+
+.muted {
+  background-color:lightgrey;
+}

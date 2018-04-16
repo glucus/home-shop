@@ -1,10 +1,8 @@
 import React from 'react';
 
 const PaymentMethods = (props) => {
-  
-  const handleClick = (e) => {
-    props.handleClick(e);
-  };
+
+  const handleClick = e => props.handleClick(e);
 
   return (
     <div className="paymentMethods">
@@ -17,8 +15,7 @@ const PaymentMethods = (props) => {
                   onClick={e => handleClick(e)}
                   name={method.name}>
                   {method.name}
-          </button>
-          )
+          </button>)
         )}
         {<button disabled={props.buyAsGift}
                  onClick = {e => handleClick(e)}
@@ -33,11 +30,3 @@ const PaymentMethods = (props) => {
 
 export default PaymentMethods;
 
-/*
-    {props.buyAsGift ? (
-    <button disabled>Подарочный код</button>) : (
-    <button onClick = {e => handleClick(e)}>
-      Подарочный код
-    </button>
-    )}
-*/

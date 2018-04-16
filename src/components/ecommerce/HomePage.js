@@ -2,6 +2,7 @@ import React from 'react';
 
 import PaymentMethods from './PaymentMethods';
 import BuyAsGiftCheckbox from './BuyAsGiftCheckBox';
+import Subscriptions from './Subscriptions';
 
 class HomePage extends React.Component {
 
@@ -14,13 +15,9 @@ class HomePage extends React.Component {
     };
   }
   
-  handleChange (e) {   
-    if (e.target.type === 'checkbox') {
-      const value = e.target.checked;
-      this.setState ({
-        buyAsGift: value
-      });
-    } 
+  handleChange (e) {  
+    const value = e.target.checked;
+    this.setState ({ buyAsGift: value });
   }
 
   handleClick (e) {
@@ -67,9 +64,7 @@ class HomePage extends React.Component {
     }
   }
 
-
   render () {
-    
     return (
       <div>
         <h1>Оформление подписки</h1>
@@ -80,20 +75,18 @@ class HomePage extends React.Component {
                         usePromoCode={this.state.usePromoCode}
                         handleClick={e => this.handleClick(e)} 
                         />
-
-        <BuyAsGiftCheckbox buyAsGift={this.state.buyAsGift}
-                           usePromoCode={this.state.usePromoCode}
-                           handleChange={e => this.handleChange(e)}
-                           hidden={this.state.usePromoCode ? 'hidden' : ''}
-                           />
-
-        <p>buy As gift {+this.state.buyAsGift}</p>
-        <p>use Promo Code {+this.state.usePromoCode}</p>
+        <BuyAsGiftCheckbox 
+                        buyAsGift={this.state.buyAsGift}
+                        usePromoCode={this.state.usePromoCode}
+                        handleChange={e => this.handleChange(e)}
+                        hidden={this.state.usePromoCode ? 'hidden' : ''}
+                        />
+        {this.state.selectedMethod && 
+          <Subscriptions />
+        }
       </div>
     );
   }
 }
-
-//PropTypes check
 
 export default HomePage;

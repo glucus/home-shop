@@ -2,9 +2,7 @@ import React from 'react';
 
 const BuyAsGiftCheckBox = (props) => {
 
-  const handleChange = (e) => {
-    props.handleChange(e);
-  };
+  const handleChange = e => props.handleChange(e);
   
   return (
     <div>

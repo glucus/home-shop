@@ -5,9 +5,9 @@ const PaymentMethods = (props) => {
   const handleClick = e => props.handleClick(e);
 
   return (
-    <div className="paymentMethods">
+    <div>
       <h4>Выберите способ оплаты</h4>
-      <div>
+      <div id={props.divId}>
         {props.paymentMethods.map (
           method => (
           <button key={method.id}

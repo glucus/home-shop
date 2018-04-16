@@ -35,10 +35,30 @@ class App extends Component {
       }
     ];
 
+    const subscriptions = [
+      {
+        id: 2,
+        name: '2 года',
+        months: 24
+      },
+      {
+        id: 1,
+        name: '1 год',
+        months: 12
+      },
+      {
+        id: 0,
+        name: '6 месяцев',
+        months: 6
+      }
+    ];
+
     return (
       <div>
         <Header />
-        <HomePage paymentMethods={paymentMethods}/>
+        <HomePage paymentMethods = {paymentMethods}
+                  subscriptions = {subscriptions}
+                  />
         <Footer />
       </div>
     );

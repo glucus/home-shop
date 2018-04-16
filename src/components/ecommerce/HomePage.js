@@ -11,7 +11,8 @@ class HomePage extends React.Component {
     this.state = {
       buyAsGift: false,
       usePromoCode: false,
-      selectedMethod: ''
+      paymentMethod: null,
+      subscription: null
     };
   }
   
@@ -20,60 +21,71 @@ class HomePage extends React.Component {
     this.setState ({ buyAsGift: value });
   }
 
+
   handleClick (e) {
 
     let selectedButton = e.target;
+    let field = selectedButton.parentNode.id;  // used for setting state
+
     let buttons = e.target.parentNode.getElementsByTagName ('button');
-    let buttonsArray = [...buttons]; 
+    let buttonsArray = [...buttons]; // html collection to array
 
     let filtered = buttonsArray.filter (
       button => button.id !== selectedButton.id
     );
 
-    // if another method is selected, select new method & append classes
-    if (this.state.selectedMethod !== e.target.name) {
+    // if another option is selected, select new option & append classes
+    if (this.state[field] !== e.target.name) {
 
-      // add classes first
       selectedButton.className = 'highlighted';
       filtered.forEach (element => element.className='muted')
 
-      if (e.target.name === 'Подарочный код') {  // promo code
-        
+      // promo code vs. any other payment method
+      if (e.target.name === 'Подарочный код') {  
         this.setState ({
-          selectedMethod: e.target.name,
           usePromoCode: true,
           buyAsGift: false
         }); 
-
-      } else {  // any other payment method
+      } else {
         this.setState ({
-          selectedMethod: e.target.name,
           usePromoCode: false
-        });
+        }); 
       }
+
+      // any other conditionals (discounts etc)
+      // ... here
+
+      // select payment method or subscription
+      this.setState ({
+        [field]: e.target.name,
+      }); 
         
     } else {
       // if method already selected, reset state to initial, remove classes
       selectedButton.className = '';
-      filtered.forEach (element => element.className='')
+      filtered.forEach (element => element.className='');
 
       this.setState ({
-        selectedMethod: '',
+        [field]: null,
         usePromoCode: false
       });
     }
   }
+
 
   render () {
     return (
       <div>
         <h1>Оформление подписки</h1>
         <p>Спасибо, что решили стать участниками клуба</p>
-        <p>{this.state.selectedMethod} selected</p>
+        <p>
+          {this.state.paymentMethod} {this.state.subscription} selected
+        </p>
         <PaymentMethods paymentMethods={this.props.paymentMethods} 
                         buyAsGift={this.state.buyAsGift}
                         usePromoCode={this.state.usePromoCode}
-                        handleClick={e => this.handleClick(e)} 
+                        handleClick={e => this.handleClick(e)}
+                        divId='paymentMethod'
                         />
         <BuyAsGiftCheckbox 
                         buyAsGift={this.state.buyAsGift}
@@ -81,8 +93,11 @@ class HomePage extends React.Component {
                         handleChange={e => this.handleChange(e)}
                         hidden={this.state.usePromoCode ? 'hidden' : ''}
                         />
-        {this.state.selectedMethod && 
-          <Subscriptions />
+        {this.state.paymentMethod && 
+        <Subscriptions  subscriptions={this.props.subscriptions}
+                        handleClick={e => this.handleClick(e)}
+                        divId='subscription'
+                        />
         }
       </div>
     );

@@ -10,7 +10,7 @@ class HomePage extends React.Component {
     this.state = {
       buyAsGift: false,
       usePromoCode: false,
-      selectedMethod: '',
+      selectedMethod: ''
     };
   }
   
@@ -23,61 +23,52 @@ class HomePage extends React.Component {
     } 
   }
 
-
   handleClick (e) {
+
     let selectedButton = e.target;
     let buttons = e.target.parentNode.getElementsByTagName ('button');
-
-    // transforming html collection into array
     let buttonsArray = [...buttons]; 
-    
+
     let filtered = buttonsArray.filter (
       button => button.id !== selectedButton.id
     );
-    
-    // append classes to selected and not selected buttons
-    if (selectedButton.className === 'highlighted') {
-      selectedButton.className = '';
-      filtered.forEach (element => element.className='')
-    } else {
+
+    // if another method is selected, select new method & append classes
+    if (this.state.selectedMethod !== e.target.name) {
+
+      // add classes first
       selectedButton.className = 'highlighted';
-      filtered.forEach (element => element.className='muted')  
-    }
+      filtered.forEach (element => element.className='muted')
 
-    // checks whether promo code has been chosen 
-    if (e.target.name === 'Подарочный код') {
-
-      let checkbox = document.querySelector ("input[name='buyAsGift']");
-      //let checkboxLabel = document.querySelector ('buyAsGiftLabel');
-
-      if (!checkbox.disabled) {
-        checkbox.setAttribute ('disabled', 'disabled');
-        checkbox.classList.add ('hidden');
-        //checkboxLabel.classList.add ('hidden');
-
-      } else {
-        checkbox.removeAttribute ('disabled');
-        checkbox.classList.remove ('hidden');
-        //checkboxLabel.classList.remove ('hidden');
-      }
-
-      this.setState ({
+      if (e.target.name === 'Подарочный код') {  // promo code
+        
+        this.setState ({
           selectedMethod: e.target.name,
           usePromoCode: true,
           buyAsGift: false
-      }); 
+        }); 
 
+      } else {  // any other payment method
+        this.setState ({
+          selectedMethod: e.target.name,
+          usePromoCode: false
+        });
+      }
+        
     } else {
+      // if method already selected, reset state to initial, remove classes
+      selectedButton.className = '';
+      filtered.forEach (element => element.className='')
+
       this.setState ({
-        selectedMethod: e.target.name,
+        selectedMethod: '',
         usePromoCode: false
       });
     }
   }
 
+
   render () {
-    
-    //const hidden = this.state.usePromoCode ? 'hidden' : '';
     
     return (
       <div>
@@ -91,7 +82,9 @@ class HomePage extends React.Component {
                         />
 
         <BuyAsGiftCheckbox buyAsGift={this.state.buyAsGift}
+                           usePromoCode={this.state.usePromoCode}
                            handleChange={e => this.handleChange(e)}
+                           hidden={this.state.usePromoCode ? 'hidden' : ''}
                            />
 
         <p>buy As gift {+this.state.buyAsGift}</p>

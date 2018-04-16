@@ -5,16 +5,17 @@ const BuyAsGiftCheckBox = (props) => {
   const handleChange = (e) => {
     props.handleChange(e);
   };
-  // className={props.hidden}
+  
   return (
     <div>
-      <label htmlFor="buyAsGift">
+      <label className={props.hidden}>
         Покупаю подписку в подарок
       </label>
       <input type="checkbox"
           name="buyAsGift"
-          id="buyAsGift"
           checked={props.buyAsGift}
+          className={props.hidden}
+          disabled={props.usePromoCode}
           onChange={e => handleChange(e)}>
       </input>
   </div>

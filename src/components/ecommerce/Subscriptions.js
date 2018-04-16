@@ -2,11 +2,12 @@ import React from 'react';
 
 const Subscriptions = (props) => {
   
-  const handleClick = e => {
-    props.handleClick (e);
-  };
-  
-  // type='subscription'
+  const handleClick = e => props.handleClick (e);
+
+  const totalPrice = (price, months) => {
+    return Number.parseInt (price, 10) * Number.parseInt (months, 10);
+  }; 
+
   return (
     <div>
       <h4>Выберите срок подписки</h4>
@@ -16,9 +17,17 @@ const Subscriptions = (props) => {
           <button key={subscription.id}
                   id={subscription.id}
                   onClick={e => handleClick(e)}
-                  name={subscription.months}>
-            {subscription.name}
-          </button>)
+                  name={subscription.months}
+                  >
+            <p>{subscription.name}</p>
+            <p className='brownText'>
+              {totalPrice (subscription.monthlyPrice, subscription.months)} руб
+            </p>
+            <p className='bigText'>
+              <b>{subscription.monthlyPrice} руб / мес</b>
+            </p>
+          </button>
+          )
         )}
       </div>
   </div>

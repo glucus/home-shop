@@ -20,3 +20,11 @@ div {
 .muted {
   background-color:lightgrey;
 }
+
+.brownText {
+  color: rgb(153, 77, 0);
+}
+
+.bigText {
+  font-size: 1.5em;
+}

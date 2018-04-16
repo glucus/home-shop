@@ -39,17 +39,20 @@ class App extends Component {
       {
         id: 2,
         name: '2 года',
-        months: 24
+        months: 24,
+        monthlyPrice: 120
       },
       {
         id: 1,
         name: '1 год',
-        months: 12
+        months: 12,
+        monthlyPrice: 125
       },
       {
         id: 0,
         name: '6 месяцев',
-        months: 6
+        months: 6,
+        monthlyPrice: 130
       }
     ];
 

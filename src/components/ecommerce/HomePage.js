@@ -3,6 +3,7 @@ import React from 'react';
 import PaymentMethods from './PaymentMethods';
 import BuyAsGiftCheckbox from './BuyAsGiftCheckBox';
 import Subscriptions from './Subscriptions';
+import FinalPayment from './FinalPayment';
 
 class HomePage extends React.Component {
 
@@ -20,7 +21,6 @@ class HomePage extends React.Component {
     const value = e.target.checked;
     this.setState ({ buyAsGift: value });
   }
-
 
   handleClick (e) {
 
@@ -52,8 +52,8 @@ class HomePage extends React.Component {
         }); 
       }
 
-      // any other conditionals (discounts etc)
-      // ... here
+      // any other conditionals (discounts, autorenewal etc) here
+      // ... 
 
       // select payment method or subscription
       this.setState ({
@@ -71,7 +71,6 @@ class HomePage extends React.Component {
       });
     }
   }
-
 
   render () {
     return (
@@ -97,7 +96,9 @@ class HomePage extends React.Component {
         <Subscriptions  subscriptions={this.props.subscriptions}
                         handleClick={e => this.handleClick(e)}
                         divId='subscription'
-                        />
+                        />}
+        {this.state.subscription && 
+          <FinalPayment />
         }
       </div>
     );

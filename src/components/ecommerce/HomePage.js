@@ -13,14 +13,19 @@ class HomePage extends React.Component {
     this.state = {
       buyAsGift: false,
       usePromoCode: false,
+      autoRenewal: false,
+      addDiscount: false,
       paymentMethod: null,
       subscription: null
     };
   }
   
-  handleChange (e) {  
+  handleChange (e) {
+    const field = e.target.name;
     const value = e.target.checked;
-    this.setState ({ buyAsGift: value });
+    this.setState ({
+      [field]: value
+    });
   }
 
   handleClick (e) {
@@ -95,14 +100,27 @@ class HomePage extends React.Component {
                   handleChange={e => this.handleChange(e)}
                   />
         {this.state.paymentMethod && 
-        <Subscriptions  subscriptions={this.props.subscriptions}
-                        handleClick={e => this.handleClick(e)}
-                        divId='subscription'
-                        />}
+          <Subscriptions subscriptions={this.props.subscriptions}
+                         handleClick={e => this.handleClick(e)}
+                         divId='subscription'
+                         />}
+        <CheckBox label='Продлевать подписку автоматически'
+                  name='autoRenewal'
+                  value={this.state.autoRenewal}
+                  disabled=''
+                  className=''
+                  handleChange={e => this.handleChange(e)}
+                  />
         {this.state.subscription && 
           <FinalPayment />
         }
-      </div>
+        <CheckBox label='Добавить подписку на скидку 5%'
+                  name='addDiscount'
+                  value={this.state.addDiscount}
+                  disabled='' 
+                  className=''
+                  handleChange={e => this.handleChange(e)}/>
+        </div>
     );
   }
 }

@@ -2,29 +2,45 @@
   box-sizing: border-box;
 }
 
+html {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1rem;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  line-height: 1.2;
 }
 
 div {
   text-align: center;
 }
 
+h1 {
+  font-size: 2.5rem;
+}
+
 h4 {
   text-align: left;
   margin: 0px 30px; 
   padding-top: 30px;
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1rem;
 }
 
 .container {
-  width: 75%;
+  width: 80%;
   margin: 0px auto;
 }
 
 .border-top {
-  border: 1px solid lightgrey; 
+  border-top: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
 }
 
 .listButton {
@@ -34,6 +50,7 @@ h4 {
   border: 2px dotted lightgrey;
   margin-right: 20px;
   margin-bottom: 20px;
+  padding: 0px 20px;
   float: left;
 }
 
@@ -88,8 +105,20 @@ div.footer p {
   color: rgb(153, 77, 0);
 }
 
-.bigText {
+.biggerText {
   font-size: 1.5em;
+}
+
+.bigText {
+  font-size: 2em;
+}
+
+.mutedText {
+  color: lightgrey;
+}
+
+.textLeft {
+  text-align: left;
 }
 
 .button-round-yellow {

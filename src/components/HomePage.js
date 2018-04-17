@@ -4,8 +4,6 @@ import Header from './common/Header';
 import Footer from './common/Footer';
 
 import PaymentMethods from './PaymentMethods';
-import CheckBox from './common/CheckBox';
-
 import Subscriptions from './Subscriptions';
 import FinalPayment from './FinalPayment';
 
@@ -82,72 +80,47 @@ class HomePage extends React.Component {
 
   
   render () {
-
     const renewal = ['Visa', 'Yandex Money', 'PayPal', 'SMS'];
     const renewalSupported = renewal.filter (
       method => method === this.state.paymentMethod.name
     );
-    
+
     return (
       <div className='container'>
         <Header />
-        <div className='border-top'>
-          <PaymentMethods paymentMethods={this.props.paymentMethods} 
-                          buyAsGift={this.state.buyAsGift}
-                          handleClick={e => this.handleClick(e)}
-                          divId='paymentMethod'
-                          />
-          <CheckBox label='Покупаю подписку в подарок'
-                    name='buyAsGift'
-                    value={this.state.buyAsGift}
-                    disabled={(
-                      this.state.paymentMethod.name === 'Подарочный код'
-                    ) || this.state.autoRenewal}
-                    className={this.state.paymentMethod.name === 'Подарочный код' ?
-                              'hidden' : ''}
-                    handleChange={e => this.handleChange(e)}
-                    />
-        </div>
-        <div className='border-top'>
-          {this.state.paymentMethod.name !== '' && 
-            <Subscriptions 
-                    subscriptions={this.props.subscriptions}
-                    handleClick={e => this.handleClick(e)}
-                    divId='subscription'
-                    />}
-          {(renewalSupported.length > 0) && (!this.state.buyAsGift) && 
-            <CheckBox 
-                    label='Продлевать подписку автоматически'
-                    name='autoRenewal'
-                    value={this.state.autoRenewal}
-                    disabled={this.state.buyAsGift}
-                    className=''
-                    handleChange={e => this.handleChange(e)}
-                    />
-          }
-        </div>
-        <div className='border-top'>
-          {this.state.subscription.name !== '' && 
-          <div>
-            <FinalPayment 
-                    subscription = {this.state.subscription}
-                    addDiscount = {this.state.addDiscount}
-                    discountPrice = {this.props.discountPrice}
-                    />
-            {this.state.autoRenewal && <p>Далее 120 руб. в месяц</p>}
-            <CheckBox
-                    label='Добавить подписку на скидку 5%'
-                    name='addDiscount'
-                    value={this.state.addDiscount}
-                    disabled='' 
-                    className=''
-                    handleChange={e => this.handleChange(e)}/>
-          </div>}
-        </div>
+        <PaymentMethods 
+                  paymentMethods = {this.props.paymentMethods}
+                  divId = 'paymentMethod'
+                  paymentMethod = {this.state.paymentMethod}
+                  buyAsGift = {this.state.buyAsGift}
+                  handleClick = {e => this.handleClick(e)}
+                  handleChange = {e => this.handleChange(e)}
+        />
+        {this.state.paymentMethod.name !== '' && 
+        <Subscriptions 
+                  subscriptions = {this.props.subscriptions}
+                  divId = 'subscription'
+                  autoRenewal = {this.state.autoRenewal}
+                  renewalSupported = { renewalSupported.length > 0 ? true : false}
+                  paymentMethod = {this.state.paymentMethod}
+                  buyAsGift = {this.state.buyAsGift}
+                  handleClick = {e => this.handleClick(e)}
+                  handleChange={e => this.handleChange(e)}
+        />}
+        {this.state.subscription.name !== '' && 
+        <FinalPayment
+              subscription = {this.state.subscription}
+              autoRenewal = {this.state.autoRenewal}
+              renewalSupported = { renewalSupported.length > 0 ? true : false}
+              addDiscount = {this.state.addDiscount}
+              discountPrice = {this.props.discountPrice}
+              handleChange = {e => this.handleChange(e)}
+              buyAsGift = {this.state.buyAsGift}
+        />}
         <Footer disabled={this.state.subscription.name === ''}
-                  className={this.state.subscription.name === '' ? 
-                    'hidden' : 'button-round-yellow'}
-                  />
+                className={this.state.subscription.name === '' ? 
+                'hidden' : 'button-round-yellow'}
+                />
         </div>
     );
   }

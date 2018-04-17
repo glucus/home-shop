@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -9,8 +13,45 @@ div {
   border: 1px solid lightgrey;
 }
 
-p {
-  border-color: 1px solid red;
+h4 {
+  text-align: left;
+  margin: 20px 30px;
+}
+
+.container {
+  width: 75%;
+  margin: 0px auto;
+}
+
+.listButton {
+  width: 250px;
+  height: 125px;
+  background-color: white;
+  border: 2px dotted lightgrey;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  float: left;
+}
+
+.clearfix {
+  padding: 20px 30px;
+}
+
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.footer {
+  text-align: left;
+  background-color: rgb(230, 230, 230);
+}
+
+div.footer p {
+  width: 40%;
+  float: left;
+  color: grey;
 }
 
 .hidden {

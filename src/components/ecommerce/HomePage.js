@@ -58,8 +58,8 @@ class HomePage extends React.Component {
     // if another option is selected, select new option & append classes
     if (this.state[field] !== selectedObject) {
 
-      selectedButton.className = 'highlighted';
-      filtered.forEach (element => element.className='muted')
+      selectedButton.className = 'listButton highlighted';
+      filtered.forEach (element => element.className='listButton muted')
       
       //set state to selected payment method or subscription
       this.setState ({
@@ -68,8 +68,8 @@ class HomePage extends React.Component {
         
     } else {
       // if method already selected, reset state to initial, remove classes
-      selectedButton.className = '';
-      filtered.forEach (element => element.className='');
+      selectedButton.className = 'listButton';
+      filtered.forEach (element => element.className='listButton');
 
       this.setState ({
         [field]: {name: ''}
@@ -77,6 +77,9 @@ class HomePage extends React.Component {
     }
   }
 
+  //  <p>{this.state.paymentMethod.name}</p>
+  //  <p>{this.state.subscription.name}</p>
+  
   render () {
 
     const renewal = ['Visa', 'Yandex Money', 'PayPal', 'SMS'];
@@ -85,11 +88,10 @@ class HomePage extends React.Component {
     );
     
     return (
-      <div>
+      <div className='container'>
         <h1>Оформление подписки</h1>
         <p>Спасибо, что решили стать участниками клуба</p>
-        <p>{this.state.paymentMethod.name}</p>
-        <p>{this.state.subscription.name}</p>
+
         <PaymentMethods paymentMethods={this.props.paymentMethods} 
                         buyAsGift={this.state.buyAsGift}
                         handleClick={e => this.handleClick(e)}

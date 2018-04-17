@@ -78,6 +78,11 @@ class HomePage extends React.Component {
 
   render () {
 
+    const renewal = ['Visa', 'Yandex Money', 'PayPal', 'SMS'];
+    const renewalSupported = renewal.filter (
+      method => method === this.state.paymentMethod.name
+    );
+    
     return (
       <div>
         <h1>Оформление подписки</h1>
@@ -94,8 +99,11 @@ class HomePage extends React.Component {
         <CheckBox label='Покупаю подписку в подарок'
                   name='buyAsGift'
                   value={this.state.buyAsGift}
-                  disabled={this.state.paymentMethod.name === 'Подарочный код'}
-                  className={this.state.usePromoCode ? 'hidden' : ''}
+                  disabled={(
+                    this.state.paymentMethod.name === 'Подарочный код'
+                  ) || this.state.autoRenewal}
+                  className={this.state.paymentMethod.name === 'Подарочный код' ?
+                             'hidden' : ''}
                   handleChange={e => this.handleChange(e)}
                   />
         {this.state.paymentMethod.name !== '' && 
@@ -104,25 +112,36 @@ class HomePage extends React.Component {
                   handleClick={e => this.handleClick(e)}
                   divId='subscription'
                   />}
-        <CheckBox label='Продлевать подписку автоматически'
+        {(renewalSupported.length > 0) && !this.state.buyAsGift && 
+          <CheckBox 
+                  label='Продлевать подписку автоматически'
                   name='autoRenewal'
                   value={this.state.autoRenewal}
-                  disabled=''
+                  disabled={this.state.buyAsGift}
                   className=''
                   handleChange={e => this.handleChange(e)}
                   />
+        }
         {this.state.subscription.name !== '' && 
+        <div>
           <FinalPayment 
                   subscription = {this.state.subscription}
                   addDiscount = {this.state.addDiscount}
-                  discountValue = {this.props.discountValue}
-                  />}
-        <CheckBox label='Добавить подписку на скидку 5%'
+                  discountPrice = {this.props.discountPrice}
+                  />
+          {this.state.autoRenewal && <p>Далее 120 руб. в месяц</p>}
+          <CheckBox
+                  label='Добавить подписку на скидку 5%'
                   name='addDiscount'
                   value={this.state.addDiscount}
                   disabled='' 
                   className=''
                   handleChange={e => this.handleChange(e)}/>
+          <button 
+                  disabled={this.state.subscription.name === ''}>
+            Оплатить
+          </button>
+        </div>}
         </div>
     );
   }

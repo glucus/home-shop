@@ -7,11 +7,11 @@ import Footer from './components/ecommerce/common/Footer';
 class App extends Component {
 
   render() {
-    const discountValue = 5;
+    const discountPrice = 150;
     const paymentMethods = [
       {
         id: 0, 
-        name: 'Visa Something',
+        name: 'Visa',
         logo: 'visa.png'
       },
       {
@@ -21,7 +21,7 @@ class App extends Component {
       },
       {
         id: 2,
-        name: 'Pay Pal',
+        name: 'PayPal',
         logo: 'payPal.png'
       },
       {
@@ -67,7 +67,7 @@ class App extends Component {
         <Header />
         <HomePage paymentMethods={paymentMethods}
                   subscriptions={subscriptions}
-                  discountValue={discountValue}
+                  discountPrice={discountPrice}
                   />
         <Footer />
       </div>

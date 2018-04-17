@@ -2,16 +2,16 @@ import React from 'react';
 
 const FinalPayment = (props) => {
 
-const totalPrice = (monthlyPrice, monthsNum, addDiscount, discountValue) => {
+const totalPrice = (monthlyPrice, monthsNum, addDiscount, discountPrice) => {
   
   const price = Number.parseInt (monthlyPrice, 10);
   const months = Number.parseInt (monthsNum, 10);
-  const discount = Number.parseInt (discountValue, 10);
+  const discountPr = Number.parseInt (discountPrice, 10);
 
   if (addDiscount) {
-    return (1 + discount / 100) * (price * months);
+    return price * months + discountPr;
   } 
-    return (price * months);
+    return price * months;
 };
   
 
@@ -23,7 +23,7 @@ const totalPrice = (monthlyPrice, monthsNum, addDiscount, discountValue) => {
           props.subscription.monthlyPrice,
           props.subscription.months,
           props.addDiscount,
-          props.discountValue
+          props.discountPrice
         )} руб    
       </b></p>
     </div>

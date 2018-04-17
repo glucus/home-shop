@@ -1,7 +1,8 @@
 import React from 'react';
 
 import PaymentMethods from './PaymentMethods';
-import BuyAsGiftCheckbox from './BuyAsGiftCheckBox';
+import CheckBox from './common/CheckBox';
+
 import Subscriptions from './Subscriptions';
 import FinalPayment from './FinalPayment';
 
@@ -86,12 +87,13 @@ class HomePage extends React.Component {
                         handleClick={e => this.handleClick(e)}
                         divId='paymentMethod'
                         />
-        <BuyAsGiftCheckbox 
-                        buyAsGift={this.state.buyAsGift}
-                        usePromoCode={this.state.usePromoCode}
-                        handleChange={e => this.handleChange(e)}
-                        hidden={this.state.usePromoCode ? 'hidden' : ''}
-                        />
+        <CheckBox label='Покупаю подписку в подарок'
+                  name='buyAsGift'
+                  value={this.state.buyAsGift}
+                  disabled={this.state.usePromoCode}
+                  className={this.state.usePromoCode ? 'hidden' : ''}
+                  handleChange={e => this.handleChange(e)}
+                  />
         {this.state.paymentMethod && 
         <Subscriptions  subscriptions={this.props.subscriptions}
                         handleClick={e => this.handleClick(e)}

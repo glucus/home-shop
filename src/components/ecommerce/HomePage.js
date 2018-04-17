@@ -10,13 +10,13 @@ class HomePage extends React.Component {
 
   constructor (props) {
     super (props);
+
     this.state = {
       buyAsGift: false,
-      usePromoCode: false,
       autoRenewal: false,
       addDiscount: false,
-      paymentMethod: null,
-      subscription: null
+      paymentMethod: {name: ''},
+      subscription: {name: ''}
     };
   }
   
@@ -29,42 +29,41 @@ class HomePage extends React.Component {
   }
 
   handleClick (e) {
-
     let selectedButton = e.target;
     let field = selectedButton.parentNode.id;  // used for setting state
 
+    let propsName = '';
+    if (field === 'paymentMethod') {
+      propsName = 'paymentMethods';
+    } else if (field === 'subscription') {
+      propsName = 'subscriptions';
+    } 
+
+    // for state 
+    let idNum = Number.parseInt (e.target.id, 10);
+    let selectedObjectArr = this.props[propsName].filter (
+      object => object.id === idNum
+    );
+    let selectedObject = selectedObjectArr[0];
+
+    // for styling classes
     let buttons = e.target.parentNode.getElementsByTagName ('button');
     let buttonsArray = [...buttons]; // html collection to array
-
     let filtered = buttonsArray.filter (
       button => button.id !== selectedButton.id
     );
+    
 
     // if another option is selected, select new option & append classes
-    if (this.state[field] !== e.target.name) {
+    if (this.state[field] !== selectedObject) {
 
       selectedButton.className = 'highlighted';
       filtered.forEach (element => element.className='muted')
-
-      // promo code vs. any other payment method
-      if (e.target.name === 'Подарочный код') {  
-        this.setState ({
-          usePromoCode: true,
-          buyAsGift: false
-        }); 
-      } else {
-        this.setState ({
-          usePromoCode: false
-        }); 
-      }
-
-      // any other conditionals (discounts, autorenewal etc) here
-      // ... 
-
-      // select payment method or subscription
+      
+      //set state to selected payment method or subscription
       this.setState ({
-        [field]: e.target.name,
-      }); 
+        [field]: selectedObject
+      });
         
     } else {
       // if method already selected, reset state to initial, remove classes
@@ -72,38 +71,39 @@ class HomePage extends React.Component {
       filtered.forEach (element => element.className='');
 
       this.setState ({
-        [field]: null,
-        usePromoCode: false
+        [field]: {name: ''}
       });
     }
   }
 
   render () {
+
     return (
       <div>
         <h1>Оформление подписки</h1>
         <p>Спасибо, что решили стать участниками клуба</p>
         <p>
-          {this.state.paymentMethod} {this.state.subscription} selected
+          {this.state.paymentMethod.name === '' ? this.state.paymentMethod.name : ''} 
+          {this.state.subscription.name === '' ? this.state.subscription.name : ''} 
         </p>
         <PaymentMethods paymentMethods={this.props.paymentMethods} 
                         buyAsGift={this.state.buyAsGift}
-                        usePromoCode={this.state.usePromoCode}
                         handleClick={e => this.handleClick(e)}
                         divId='paymentMethod'
                         />
         <CheckBox label='Покупаю подписку в подарок'
                   name='buyAsGift'
                   value={this.state.buyAsGift}
-                  disabled={this.state.usePromoCode}
+                  disabled={this.state.paymentMethod.name === 'Подарочный код'}
                   className={this.state.usePromoCode ? 'hidden' : ''}
                   handleChange={e => this.handleChange(e)}
                   />
-        {this.state.paymentMethod && 
-          <Subscriptions subscriptions={this.props.subscriptions}
-                         handleClick={e => this.handleClick(e)}
-                         divId='subscription'
-                         />}
+        {this.state.paymentMethod.name !== '' && 
+          <Subscriptions 
+                  subscriptions={this.props.subscriptions}
+                  handleClick={e => this.handleClick(e)}
+                  divId='subscription'
+                  />}
         <CheckBox label='Продлевать подписку автоматически'
                   name='autoRenewal'
                   value={this.state.autoRenewal}
@@ -111,9 +111,12 @@ class HomePage extends React.Component {
                   className=''
                   handleChange={e => this.handleChange(e)}
                   />
-        {this.state.subscription && 
-          <FinalPayment />
-        }
+        {this.state.subscription.name !== '' && 
+          <FinalPayment 
+                  subscription = {this.state.subscription}
+                  addDiscount = {this.state.addDiscount}
+                  discountValue = {this.props.discountValue}
+                  />}
         <CheckBox label='Добавить подписку на скидку 5%'
                   name='addDiscount'
                   value={this.state.addDiscount}

@@ -8,6 +8,16 @@ const Subscriptions = (props) => {
     return Number.parseInt (price, 10) * Number.parseInt (months, 10);
   }; 
 
+  /*
+                <p>{subscription.name}</p>
+              <p className='brownText'>
+              {totalPrice (subscription.monthlyPrice, subscription.months)} руб
+              </p>
+              <p className='bigText'>
+                <b>{subscription.monthlyPrice} руб / мес</b>
+              </p>
+  */
+
   return (
     <div>
       <h4>Выберите срок подписки</h4>
@@ -19,13 +29,9 @@ const Subscriptions = (props) => {
                   onClick={e => handleClick(e)}
                   name={subscription.months}
                   >
-            <p>{subscription.name}</p>
-            <p className='brownText'>
-              {totalPrice (subscription.monthlyPrice, subscription.months)} руб
-            </p>
-            <p className='bigText'>
-              <b>{subscription.monthlyPrice} руб / мес</b>
-            </p>
+          {subscription.name}&nbsp;
+          {totalPrice (subscription.monthlyPrice, subscription.months)} руб&nbsp;
+          {subscription.monthlyPrice} руб / мес
           </button>
           )
         )}

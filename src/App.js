@@ -7,6 +7,7 @@ import Footer from './components/ecommerce/common/Footer';
 class App extends Component {
 
   render() {
+    const discountValue = 5;
     const paymentMethods = [
       {
         id: 0, 
@@ -32,6 +33,11 @@ class App extends Component {
         id: 4,
         name: 'QIWI',
         logo: 'qiwi.png'
+      },
+      {
+        id: 5,
+        name: 'Подарочный код',
+        logo: ''
       }
     ];
 
@@ -59,8 +65,9 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <HomePage paymentMethods = {paymentMethods}
-                  subscriptions = {subscriptions}
+        <HomePage paymentMethods={paymentMethods}
+                  subscriptions={subscriptions}
+                  discountValue={discountValue}
                   />
         <Footer />
       </div>

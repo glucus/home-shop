@@ -13,15 +13,11 @@ const PaymentMethods = (props) => {
           <button key={method.id}
                   id={method.id}
                   onClick={e => handleClick(e)}
-                  name={method.name}>
+                  name={method.name}
+                  disabled={method.name === 'Подарочный код' && props.buyAsGift}>
                   {method.name}
           </button>)
         )}
-        {<button disabled={props.buyAsGift}
-                 onClick = {e => handleClick(e)}
-                 name='Подарочный код'>
-          Подарочный код
-        </button>}
       </div>
   </div>
   );

@@ -17,7 +17,10 @@ const PaymentMethods = (props) => {
                   name={method.name}
                   disabled={method.name === 'Подарочный код' && props.buyAsGift}
                   className='listButton'>
-                  {method.name}
+            {method.logo === '' ? 
+              <p>{method.name}</p> : 
+              <img src={method.logo} alt={method.name}/>
+            }
           </button>)
         )}
       </div>

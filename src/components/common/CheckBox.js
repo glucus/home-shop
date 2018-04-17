@@ -5,10 +5,10 @@ const CheckBox = (props) => {
   const handleChange = e => props.handleChange(e);
   const className = name => '' + name;
   
-  // props: label, name, value, disabled, className
+  // props: label, name, value, disabled, className, handleChange
   
   return (
-    <div>
+    <div className='checkbox-container'>
       <label className={className (props.className)}>
         {props.label}
       </label>

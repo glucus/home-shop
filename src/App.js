@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/ecommerce/common/Header';
-import HomePage from './components/ecommerce/HomePage';
-import Footer from './components/ecommerce/common/Footer';
+import HomePage from './components/HomePage';
+
+import visaImg from './images/sprite.payment-cards.png';
+import yandexMoneyImg from './images/sprite.payment-yandexmoney.png';
+import payPalImg from './images/sprite.payment-paypal.png';
+import qiwiImg from './images/sprite.payment-qiwi.png';
 
 class App extends Component {
 
@@ -12,17 +15,17 @@ class App extends Component {
       {
         id: 0, 
         name: 'Visa',
-        logo: 'visa.png'
+        logo: visaImg
       },
       {
         id: 1, 
         name: 'Yandex Money',
-        logo: 'yandexMoney.png'
+        logo: yandexMoneyImg
       },
       {
         id: 2,
         name: 'PayPal',
-        logo: 'payPal.png'
+        logo: payPalImg
       },
       {
         id: 3,
@@ -32,7 +35,7 @@ class App extends Component {
       {
         id: 4,
         name: 'QIWI',
-        logo: 'qiwi.png'
+        logo: qiwiImg
       },
       {
         id: 5,
@@ -64,12 +67,10 @@ class App extends Component {
 
     return (
       <div>
-        <Header />
         <HomePage paymentMethods={paymentMethods}
                   subscriptions={subscriptions}
                   discountPrice={discountPrice}
                   />
-        <Footer />
       </div>
     );
   }

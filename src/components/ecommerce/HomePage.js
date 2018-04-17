@@ -29,9 +29,10 @@ class HomePage extends React.Component {
   }
 
   handleClick (e) {
-    let selectedButton = e.target;
+    
+    e.preventDefault();
+    let selectedButton = (e.target.type !== 'submit') ? e.target.parentNode : e.target;
     let field = selectedButton.parentNode.id;  // used for setting state
-
     let propsName = '';
     if (field === 'paymentMethod') {
       propsName = 'paymentMethods';
@@ -40,14 +41,14 @@ class HomePage extends React.Component {
     } 
 
     // for state 
-    let idNum = Number.parseInt (e.target.id, 10);
+    let idNum = Number.parseInt (selectedButton.id, 10);
     let selectedObjectArr = this.props[propsName].filter (
       object => object.id === idNum
     );
     let selectedObject = selectedObjectArr[0];
 
     // for styling classes
-    let buttons = e.target.parentNode.getElementsByTagName ('button');
+    let buttons = selectedButton.parentNode.getElementsByTagName ('button');
     let buttonsArray = [...buttons]; // html collection to array
     let filtered = buttonsArray.filter (
       button => button.id !== selectedButton.id
@@ -87,10 +88,8 @@ class HomePage extends React.Component {
       <div>
         <h1>Оформление подписки</h1>
         <p>Спасибо, что решили стать участниками клуба</p>
-        <p>
-          {this.state.paymentMethod.name === '' ? this.state.paymentMethod.name : ''} 
-          {this.state.subscription.name === '' ? this.state.subscription.name : ''} 
-        </p>
+        <p>{this.state.paymentMethod.name}</p>
+        <p>{this.state.subscription.name}</p>
         <PaymentMethods paymentMethods={this.props.paymentMethods} 
                         buyAsGift={this.state.buyAsGift}
                         handleClick={e => this.handleClick(e)}

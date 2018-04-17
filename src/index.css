@@ -9,6 +9,10 @@ div {
   border: 1px solid lightgrey;
 }
 
+p {
+  border-color: 1px solid red;
+}
+
 .hidden {
   display: none;
 }

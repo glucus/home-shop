@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import HomePage from './components/HomePage';
 
 import visaImg from './images/sprite.payment-cards.png';

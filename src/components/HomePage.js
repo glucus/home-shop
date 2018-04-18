@@ -109,13 +109,13 @@ class HomePage extends React.Component {
         />}
         {this.state.subscription.name !== '' && 
         <FinalPayment
-              subscription = {this.state.subscription}
-              autoRenewal = {this.state.autoRenewal}
-              renewalSupported = { renewalSupported.length > 0 ? true : false}
-              addDiscount = {this.state.addDiscount}
-              discountPrice = {this.props.discountPrice}
-              handleChange = {e => this.handleChange(e)}
-              buyAsGift = {this.state.buyAsGift}
+                  subscription = {this.state.subscription}
+                  autoRenewal = {this.state.autoRenewal}
+                  renewalSupported = { renewalSupported.length > 0 ? true : false}
+                  addDiscount = {this.state.addDiscount}
+                  discountPrice = {this.props.discountPrice}
+                  handleChange = {e => this.handleChange(e)}
+                  buyAsGift = {this.state.buyAsGift}
         />}
         <Footer disabled={this.state.subscription.name === ''}
                 className={this.state.subscription.name === '' ? 
